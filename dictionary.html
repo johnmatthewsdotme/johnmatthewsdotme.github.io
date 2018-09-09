@@ -1,0 +1,458 @@
+<!doctype html>
+<html class="static no-js" lang="">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>The Immic Learner's Dictionary Interface</title>
+<meta name="description" content="Immic English">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+<link rel="icon" href="data:image/ico;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAADUExURf/MAH6tkXUAAAAMSURBVAjXY2AgDQAAADAAAceqhY4AAAAASUVORK5CYII=">
+<style>
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}
+
+/* LAYOUT */
+html {height: 100%;position:fixed;}
+body {position:fixed; font-family: sans-serif; font-size: 18px; line-height:1em; font-weight: 800; width: 100%; min-height: 400px; height: 100%;}
+
+#wrapper.scrolling {z-index: 1499; position:absolute; width: 100%; min-height: 400px; height: 100%; overflow-y: auto;}
+#wrapper.scrolling #hero {position: relative; width: 100%; height: 50%;}
+#wrapper.scrolling #main {padding: 3em 20% 5% 20%;position: relative;}
+
+
+/* LINKS */
+a, a:active, a:focus{color: #fff; outline:0; text-decoration: none;}
+a:hover {outline:0; opacity: 1;}
+.faded {opacity: .65; }
+a.faded:hover {opacity: 1;}
+
+/* HEADINGS & TEXT */
+::-moz-selection { background: transparent; }
+::selection { background: transparent; }
+
+/* FORMS */
+input[type="password"],input[type="text"] {-webkit-appearance: none;-moz-appearance: none;appearance: none; border-radius:5px; background: rgba(255,255,255,.65); font-size: 1.2em; border: 1px solid rgba(0,0,0,.3); outline:0; color: #444; font-weight: 400; width: 10em; height: 1.2em; padding: 1em 1em .8em 1em; box-shadow: 0px 0px 6px 6px rgba(0,0,0,.025) inset;margin-bottom: .5em;}
+
+input[type="text"]:focus, input[type="password"]:focus {box-shadow: 0px 0px 3px 3px rgba(0,0,0,.025); background: rgba(255,255,255,.75);}
+
+::-webkit-input-placeholder {color: rgba(0,0,0,.2);}:-moz-placeholder {color: rgba(0,0,0,.2);}::-moz-placeholder {color: rgba(0,0,0,.2);}:-ms-input-placeholder {color: rgba(0,0,0,.2);}
+
+#password_box {display:inline-block;position:relative;}
+input[type="submit"] {position: absolute; z-index: 2; right:0; top:0; font-size: 1.2em; width: 3em; height: 100%; padding: 0; border: 0; margin: 0; background: transparent;}
+#password_submit_img {opacity: .3; z-index: 1; position: absolute; right:11px; top:11px; height: 44px; width: 44px;}
+
+/* LISTS */
+ul {padding:0;margin:0;list-style-type:none;}
+
+/* POSITIONING */
+.top,.right,.bottom,.left,.center,.middle,.above,.below,.height_100,.height_80 {position:absolute;z-index: 2;}
+.top {top: 1em;}
+.right {right:2%;}
+.bottom {bottom:1em;}
+.bottom-above {bottom:2.2em;}
+.left {left: 2%;}
+.center {width: 100%; text-align: center;}
+.text-center {width: 100%; text-align: center;}
+.middle:before {content: ' ';display: inline-block;vertical-align: middle;height: 100%;}
+.middle {z-index: 1; width:100%; height:100%;}
+.above {bottom: 50%;}
+.below {top: 50%;}
+.height_100 {height: 100%;}
+.height_80 {height: 80%;}
+.height_50 {height: 50%;}
+.live {z-index: 1500;}
+
+/* COLORS */
+.blue,.yellow,.green,.red,.orange,.purple,.black,.dark .black_overlay  {color: rgba(255,255,255,.9);}
+.white,.grey,.light .black_overlay,#black_text {color: rgba(0,0,0,.75);}
+.blue {background-color: #49a; background: radial-gradient(#8FC2CC,#49a);}
+.blue .comp {color:#FFC186;}
+.green {background-color: #9a4; background: radial-gradient(#C2CC8F,#9a4);}
+.red {background-color: #A30000; background: radial-gradient(#D63333,#930000);}
+.orange {background-color: #CC7A00; background: radial-gradient(#FFAD33,#CC7A00);}
+.purple {background-color: #6B246B; background: radial-gradient(#A347A3,#6B246B);}
+.black {background-color: #444; background: radial-gradient(#444,#222);}
+.black .comp {color:#CC8F05;}
+.white {background-color: #fff;}
+.grey {background-color: #aaa; background: radial-gradient(#ddd,#aaa);}
+.yellow,.paper {background-color: #e4dfd6; background: radial-gradient(#FFC238,#CC8F05); }
+.dark .black_overlay {background-color: rgba(0,0,0,.95); background: radial-gradient(rgba(0,0,0,.75),rgba(0,0,0,1));}
+.light .black_overlay {background-color: rgba(255,255,255,.95); background: radial-gradient(rgba(255,255,255,.92),rgba(255,255,255,.55));}
+
+
+/* EFFECT */
+.effect {position:fixed;top:0;left:0;width:100%;height:100%;opacity: .65; z-index: 10;}
+.static {background-image: url(data:image/png;base64,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);}
+.paper.effect {opacity: 1;}
+.red .static {opacity: .7;}
+.yellow .static {opacity: .5;}
+.transparent {opacity: .7;}
+
+/* TEXT */
+.text {font-size:1em;line-height: 1.2em;}
+.text span {display: inline-block;max-width: 900px;width:98%;}
+.xsm-text {font-size:.6em;}
+
+/* IMAGES */
+.img.middle img {display: inline-block;vertical-align: middle;}
+.img img {width:96%;max-width:660px;height:auto;opacity: .9;}
+.bg_img {display: block; z-index:0;font-size:0;}
+.bg_img img {width:auto; height:100%;}
+#dictionary .img img {max-width:660px;}
+#emailer .img img {max-width:660px;}
+
+/* INTERFACE */
+/* 
+#logo { display: block;  opacity: .9; font-size: .6em; }
+#menu_toggle {position: fixed;padding-left: 2.5em;text-indent: -120%;}
+#menu_toggle:before {opacity: .9;content: "";position: absolute;top:0;left:0;width: 2.5em;height: 0.4em;border-top: 1.2em double #fff;border-bottom: 0.4em solid #fff;}
+ */
+
+.close_toggle {position:fixed; font-size: 1em; font-weight: bold; line-height: .5em; color: rgba(255,255,255,.9); text-decoration: none;}
+.close_toggle span {font-size: 4em;position:relative; top: .25em; cursor: pointer;}
+
+
+/* POPUP */
+.black_overlay,.paper {display:none;position:absolute;top:0;left:0;width:100%;height:100%;z-index:1001}
+.white_content{display:none; position: absolute; z-index:1002;top:0;left:0;width:100%;height:100%;overflow-y: auto;-webkit-overflow-scrolling: touch;}
+#menu_box {width:90%; margin:auto; position:relative; }
+
+
+/* MENU PAGE */
+/* 
+#menu {padding: 6em 0; font-size: 1.1em; line-height: .8em;}
+#menu h2 {clear: left; margin:0; font-size: 1.1em; opacity: .75; letter-spacing: .05em; padding: 2em 0 .5em 0; font-weight: 400;}
+#menu li {display: block;float: left; margin: 0 .5em .5em 0; background: radial-gradient(#666,#444);}
+#menu li a { display: table; width: 6em; height: 4em; opacity: .85; text-align: center; text-decoration: none;}
+#menu li a:hover {opacity: 1;}
+#menu li a span {display: table-cell; padding: .2em .3em; vertical-align: middle;font-size: .65em; font-weight: 800; line-height: 1.1em;  }
+ */
+#menu li {font-size: 2em; display: block;float: left; margin: .5em .3em 1em 0;}
+#menu li a { opacity: .85; text-decoration: none;}
+#menu li a:hover {opacity: 1;}
+#menu li a.selected {opacity: .65;}
+
+/* HELPER */
+.cf:before, .cf:after {content: " ";display: table;}
+.cf:after {clear: both;}
+.cf {*zoom: 1;clear: both;}
+
+@media only screen and (min-width: 480px) {
+.text {font-size:1.3em;}
+.text span {width:90%;}
+#pop_content {width:90%;}
+}
+
+@media only screen and (min-width: 760px) {
+.text {font-size:1.62em;}
+.text span {width:80%;}
+}
+</style>
+
+<style>
+/* DICTIONARY */
+.dictionary_content {display:none; position: absolute; z-index:1002;top:0;left:0;width:100%;height:100%;overflow-y: auto;-webkit-overflow-scrolling: touch;}
+
+#escape_message {display:block;font-size: .6em;line-height: 2em; opacity: .8;}
+
+
+#hero_texts {position: absolute;width: 100%; text-align: center; bottom:50%; font-size: 4em; letter-spacing: -.05em;line-height: 1em; color: #fff;}
+#hero_texts span {letter-spacing: -.0em;}
+
+@media only screen and (min-width: 480px) {
+#bottom_message {font-size:1.3em;}
+#hero_texts {font-size:6em;}
+}
+
+@media only screen and (min-width: 760px) {
+#bottom_message {font-size:1.62em;}
+#hero_texts {font-size:9em;}
+}
+
+
+/* PREVIOUS SEARCHES */
+#previous_search_box {padding-top: 2em; font-size: 10px;line-height: 20px; width: 90%; height: 60px; max-width: 650px; overflow: hidden; margin:auto; }
+#previous_search_box .previous_search_link {text-align: left; display: inline-block; line-height: inherit; padding-right: 1em; font-size: inherit; text-decoration: none;opacity: .4;}
+
+#results_box {width:90%; font-size: 1.2em; margin: 6em auto; position:relative; color: #000; }
+#results_box a, #results_box font {color: inherit;}
+#licenseinfo {font-size: 10px; line-height: 1.5em; padding-top: 4em; color: rgba(255,255,255,.5); }
+
+#licenseinfo a {}
+	/* shared updates */
+	#results_box h1,#results_box h2,#results_box h3,#results_box h4,#results_box h5,#results_box h6,#results_box ol,#results_box ul,#results_box li,#results_box dl,#results_box dd {padding: 0;margin:0; font-size: 1em; line-height: 1.5em;} /* RESET */
+	/* Start of Entry */
+	#results_box #pagetitle {margin:.5em 0 .2em 0; padding:0; font-size: 3em; line-height:1em;}
+	#results_box .IPA {display: block; float:left; font-family: sans-serif; font-size: 1.5em; margin: 0 0 .5em 0; padding:0 .6em 0 0; line-height:1em;}
+
+	#results_box .mw-headline {display: block; margin: 1.5em 0 0 0;clear: both;}
+	#results_box ol li {margin: .5em 0 0 30px;}
+	#results_box ul li {margin-left: 0; list-style-type: none;}
+	#results_box .thumbcaption {font-family: sans-serif; font-size: 10px; font-weight: 900; margin: .5em 0 1em 0; line-height:1.2em; text-transform: uppercase;}
+	/* simple.wiktionary.org updates */
+	#simple_Wiktionary_Results .inflection-table, 
+	#simple_Wiktionary_Results .mw-editsection, 
+	#simple_Wiktionary_Results .noprint, 
+	#simple_Wiktionary_Results .audiotable .audiolink,  
+	#simple_Wiktionary_Results .audiotable .audiometa,
+	#simple_Wiktionary_Results p,
+	#simple_Wiktionary_Results table,
+	#simple_Wiktionary_Results .gallery,
+	#simple_Wiktionary_Results .notice,
+	#simple_Wiktionary_Results dl dd i,
+	.infobox, .sisterproject
+	{display:none;}
+
+	/* en.wiktionary.org updates */
+	.noprint, 
+	.mw-editsection,
+	.magnify,
+	#en_Wiktionary_Results p,
+	#en_Wiktionary_Results ol li ul
+	{display:none;}
+	#wikiInfo {display:none;}
+</style>
+</head>
+<body id="dictionary" class="red dark">
+<ul id="menu" class="top left live">
+	<li><a title="Go to JohnMatthews.me" href="../">Back to JohnMatthews.me</a></li>
+</ul>
+<div class="effect static"></div>
+<div id="wrapper">
+	<div class="img above center">
+		<div id="hero_texts">Dictiona<span>r</span>y</div>
+	</div>
+	<div id="dictionary_input_word_box" class="input below center live">
+		<input type="text" id="word" placeholder="Look up a word."/>
+		<div id="escape_message">Press "Enter" key  to look up word & "Esc" key to toggle.</div>
+		<div id="previous_search_box">
+			<div id="previous_search"></div>
+		</div>
+	</div>
+	<div class="text bottom-above center"><span>An Easy Way to Look Up Words<br>without Using a Bilingual Dictionary.</span></div>
+	<div id="terms_of_use" class="bottom left live xsm-text"><a class="faded" title="Read Terms of Use for Immic.com" href="http://immic.com/terms_of_use">Terms of Use</a></div>
+	<div id="copyright" class="bottom right xsm-text"><span class="faded">&copy; <script>document.write(new Date().getFullYear())</script> Immic.com</span></div>
+</div>
+<!-- LIGHTBOX-->
+	<div class="white_content">
+		<a class="close_toggle live top right" title='Close Menu (click or press "Esc" key)'><span>×</span></a>
+		<div id="menu_box"></div>
+	</div>
+	
+	<div class="dictionary_content">
+		<a class="close_toggle live top right" title='Close Menu (click or press "Esc" key)'><span>×</span></a>
+		<div id="results_box" class="cf">
+			<h1 id='pagetitle' class="cf"></h1>
+			<div id="results">
+				<div id="simple_Wiktionary_Results"></div> <!-- simple.wiktionary.org results -->
+				<div id="en_Wiktionary_Results"></div> <!-- en.wiktionary.org results -->
+				<noscript><h1 id='pagetitle'>Sorry!</h1><p>Unfortunately, your Internet browser does not support JavaScript. You need to turn Javascript support on in the settings to take advantage of this great dictionary.</p><p>This page requires jquery/ajax support to look up words on simple.wiktionary.org and en.wiktionary.org.</p></noscript>
+				<div id="licenseinfo">Modified original content <a class='sourceurl'>from Wiktionary</a>. Content is available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution / Share-Alike License</a>. This application was designed by <a href="http://johnmatthews.me"> John Matthews</a>.</div>
+
+			</div>
+		</div>
+	</div>
+	<div id="fade" class="black_overlay effect"></div>
+	<div id="interactive" class="paper effect"></div>
+<div id="wikiInfo"></div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script>
+$(document).ready(function() {
+	// ESC KEY
+	$(document).keyup(function(e) {
+	  if (e.keyCode == 27) {
+	  	var $dictionary_showing = $('.dictionary_content').css('display');
+	  	var $wrapper_showing = $('#wrapper').css('display');
+	  	if (window.location.hash && $dictionary_showing == 'none') {
+	  		$('#wrapper').hide();
+	  		$('#fade').show();
+			$('#interactive').show();
+			$('.white_content').hide();
+			$('.dictionary_content').show();
+	  	 } else if($wrapper_showing == 'none') {
+			$('#fade').hide();
+			$('#interactive').hide();
+			$('.white_content').hide();
+			$('.dictionary_content').hide();
+			$('#wrapper').show();
+			$('#word').focus();
+			}
+		 }
+	});
+	$(document).on("click","#menu_toggle",function(event) {
+		event.preventDefault();
+		$('#wrapper').hide();
+		$('#fade').show();
+		if($("#menu_box").children().first().attr('id') != "menu") {
+			$("#menu_box").load("http://johnmatthews.me/dictionary.html #menu");
+			$('.white_content').show();
+		} 
+		else {
+			$('.white_content').show();
+		}
+	});
+	$(document).on("click",".close_toggle",function(event) {
+		$('#wrapper').show();
+		$('#fade').hide();
+		$('#interactive').hide();
+		$('.white_content').hide();
+		$('.dictionary_content').hide();
+		$('#word').focus();
+	});
+	$(document).on("click","#previous_search a",function(event) {
+		var $thisHREF = $(this).attr('href');
+		var $hash = "#" + window.location.hash.substring(1);
+		//alert($hash);
+		if($thisHREF == $hash) {
+			$('#wrapper').hide();
+			$('#fade').show();
+			$('#interactive').show();
+			$('.white_content').hide();
+			$('.dictionary_content').show();
+		}
+	});
+});
+
+$(document).ready(function() {
+
+// Every State
+$(window).on('hashchange', function(e){
+	var hash = window.location.hash.substring(1);
+    $('#word').val(hash).change();
+  	$("#previous_search").prepend("<a class='previous_search_link' href='#" + hash + "'>" + hash + "</a>");
+});
+$('#word').change(function() {
+  	lookUpWord();
+  });
+// Functions
+var resultsOpen = function() {
+	$('#word').blur().val('');
+	$('#wikiInfo').html('');
+	$('#wrapper').hide();
+	$('#fade').hide();
+	$('#interactive').show();
+    $('.dictionary_content').show();
+	};
+
+var resultsClose = function() {
+	};
+// Ajax
+var baseURL = 'http://simple.wiktionary.org';
+var baseURLBackup = 'http://en.wiktionary.org';
+var mybaseURL = 'http://johnmatthews.me/dictionary.html';
+
+function showPage(page,text) {
+  var sourceurl = baseURL + '/wiki/' + page;
+
+  $('#wikiInfo').html(text);
+  $('.sourceurl').attr('href',sourceurl);
+  $('#licenseinfo').show();
+  // now you can modify content of #wikiInfo as you like
+  
+	$('#wikiInfo span#Related_words').parent().next().remove().end().remove();
+	var IPASymbols = $('span.IPA:first,span.IPA:last');
+	//var StartParent = $('#wikiInfo h2:not(.toc h2)').prev();
+	
+	IPASymbols.clone().appendTo('#simple_Wiktionary_Results');
+	//StartParent.nextAll().clone().appendTo('#simple_Wiktionary_Results');
+	$('#wikiInfo >').clone().appendTo('#simple_Wiktionary_Results');
+	$('#simple_Wiktionary_Results .toc').remove();
+	$('#simple_Wiktionary_Results #Pronunciation').parent().next('ul').remove().end().remove();
+	$('#simple_Wiktionary_Results #Pronunciation_2').parent().next('ul').remove().end().remove();
+	
+	$('#simple_Wiktionary_Results a').each(function() {
+    	$(this).attr('href','#' + $(this).text().split(' ').join('_'));
+	});
+	
+	var invalidIPA = $('#simple_Wiktionary_Results span.IPA:last');
+	if ( invalidIPA.text().charAt(0) == "[") {invalidIPA.remove()};
+	
+	$('#simple_Wiktionary_Results span').removeAttr('style');
+	$('#simple_Wiktionary_Results a img, #simple_Wiktionary_Results a.new').unwrap();
+	
+	resultsOpen();
+}
+function showPageBackup(page,text) {
+  var sourceurl = baseURLBackup + '/wiki/' + page;
+  //$('#pagetitle').text(page.split('_').join(' '));
+  //$('#wikiInfo').html('');
+  $('#wikiInfo').html(text);
+  $('.sourceurl').attr('href',sourceurl);
+  $('#licenseinfo').show();
+  
+		//Only clone English results
+		var englishParent = $('#wikiInfo #English').parent();
+		var transParent = $('#Translations').parent();
+		$(englishParent).nextUntil(transParent).clone().appendTo('#en_Wiktionary_Results');
+		//Update Pronunciation
+		$('#wikiInfo span.IPA:first').clone().prependTo('#en_Wiktionary_Results');
+		$('.interProject').parent('p').remove();
+		$('#en_Wiktionary_Results #Pronunciation').parent().next('ul').remove().end().remove();
+		$('#en_Wiktionary_Results #Etymology').parent('h3').nextAll('p').remove().end().remove();
+		$('#en_Wiktionary_Results #Etymology_1').parent().nextAll('p').remove().end().remove();
+		$('#en_Wiktionary_Results #Etymology_2').parent().nextAll('p').remove().end().remove();
+		$('#en_Wiktionary_Results #Etymology_3').parent().nextAll('p').remove().end().remove();
+		$('#en_Wiktionary_Results #Etymology_4').parent().nextAll('p').remove().end().remove();
+		$('#en_Wiktionary_Results #Usage_notes').parent().next('ul').remove().end().remove();
+		$('#en_Wiktionary_Results #Quotations').parent('h4').next('ul').remove().end().remove();
+		$('#en_Wiktionary_Results #References').parent().nextAll('ol').remove().end().remove();
+		$('#en_Wiktionary_Results a img').unwrap();
+		$('#en_Wiktionary_Results a').each(function() {
+			$(this).attr('href','#' + $(this).text().split(' ').join('_'));
+		});
+		resultsOpen();
+}
+var lookUpWord = function() {
+    var page = $('#word').val().toLowerCase().split(' ').join('_');
+    $('#pagetitle').text(page.split('_').join(' '));
+    window.location.hash = "#" + page;
+    $('#simple_Wiktionary_Results').html('...please wait...');
+
+    $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&callback=?&page='+page,
+		function(json) {
+		  if(json.parse != undefined) {
+		  $('#simple_Wiktionary_Results').html('');
+		  $('#en_Wiktionary_Results').html('');
+			showPage(page,json.parse.text['*']);
+		  } else {
+				$.getJSON(baseURLBackup+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&callback=?&page='+page,
+				function(json) { 
+				  if(json.parse != undefined) {
+				  		$('#simple_Wiktionary_Results').html('');
+					  $('#en_Wiktionary_Results').html('');
+						showPageBackup(page,json.parse.text['*']);
+					  } else {
+						$('#simple_Wiktionary_Results').html('');
+						$('#en_Wiktionary_Results').html('');
+						showPage(page.split('_').join(' '));
+						
+						$('#pagetitle').clone().html(function() {
+								text = $(this).text().split(' ');
+								var len = text.length;
+								var result = []; 
+
+							for( var i = 0; i < len; i++ ) {
+								result[i] = '<a href="#' + text[i] + '">' + text[i] + '</a>';
+							}
+							$('#simple_Wiktionary_Results').append("<div id='sorry_no_results'>Sorry, no results. Try the link(s) below.</div><div id='no_results_links'>" + result.join(' ') + '</div>');
+
+						}); 
+						$('#licenseinfo').hide();
+						}
+				  });
+		}
+  	});
+}
+if(window.location.hash) {
+	var hash = window.location.hash.substring(1);
+	if(hash != '') {
+	$('#word').val(hash);
+	lookUpWord();
+	}
+} else {
+	$('#word').focus();
+}
+});
+</script>
+</body>
+</html>
